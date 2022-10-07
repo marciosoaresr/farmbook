@@ -1,0 +1,41 @@
+<h4 class="text-center">ok</h4>
+
+<form class="form mt-4" [formGroup]="newUserform" (sumit)="register()">
+  <div class="form-group">
+    <input placeholder="e-mail" class="form-control" formControlName="email" />
+    <app-message @ngIf="newUserForm.get('email')?.errors?.required && 
+      newUserForm.get('email')?. touched" message="Email required">
+    </app-message>
+    <app-message @ngIf="newUserForm.get('email')?.errors?.email && 
+      newUserForm.get('email')?. touched" message="Email format incorrect">
+    </app-message>
+  </div>
+  <div class="form-group">
+    <input placeholder="name" class="form-control" formControlName="fullName" />
+    <app-message
+    @ngIf="newUserForm.get('fullName')?.errors && 
+    newUserForm.get('fullName')?. touched"
+    message="Name incorrect"
+  >
+</app-message>
+  </div>
+  <div class="form-group">
+    <input placeholder="user" class="form-control" formControlName="user" />
+    <app-message 
+    *ngIf="newUserForm.get('user')?.erros?.tiny && newUserform.get('user')?. touched"
+    message="User must be in lowercase"></app-message>
+    <app-message 
+    *ngIf="newUserform.get('user')?.errors?.userAlreadyExist"
+    message="User exist"></app-message>
+  </div>
+  <div class="form-group">
+    <input type="password" class="form-control" formControlName="password" />
+    <app-message 
+    *ngIf="newUserForm.errors?.passwordEqualUser"
+    message="Password must be different from user"
+    ></app-message>
+  </div>
+
+  <button class="btn btn-primary btn-block">Registration</button>
+</form>
+<p>are you already a user?<a [routerLink]="['']">log in!</a></p>
